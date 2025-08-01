@@ -455,7 +455,7 @@
         }
     </style>
 </head>
-<body>
+<body onload="getLocation()">
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-container">
@@ -772,6 +772,28 @@
                 this.classList.add('active');
             });
         });
+
+
+
+
+        const bod = document.querySelector('body');
+
+    function getLocation() {
+        navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+    function success(position) {
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+        console.log(position.coords.latitude, position.coords.longitude);
+        const xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "local.php?lat=" + position.coords.latitude + "&long" + position.coords.longitude);
+        xhttp.send();
+    }
+
+    function error() {
+    bod.style.backgroundColor = 'black';
+    }
     </script>
 </body>
 </html>
